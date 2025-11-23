@@ -36,8 +36,8 @@ Reference implementation for verification of HSM attestation in Swish certificat
   "organisationNumber": "5569741234",
   "swishNumber": "1234567890",
   "hsmVendor": "SECUROSYS",              // Optional - autodetect
-  "attestationData": "PD94bWwgdmVyc2lvbj0iMS4wI...",    // Optional if not SECUROSYS SIGNING
-  "attestationSignature": "eywPlJWUEiLDnaq+NEAs4zB3RbpKJlAd...",    // Optional if not SECUROSYS SIGNING
+  "attestationData": "PD94bWwgdmVyc2lvbj0iMS4wI...",    // Optional if not SIGNING (Not YubiHSM 2)
+  "attestationSignature": "eywPlJWUEiLDnaq+NEAs4zB3RbpKJlAd...",    // Optional if not SIGNING with SECUROSYS
   "attestationCertChain": ["-----BEGIN CERTIFICATE-----\n...", "-----BEGIN CERTIFICATE-----\n..."] // If not empty → SIGNING
 }
 ```
