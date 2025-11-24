@@ -7,9 +7,9 @@ Reference implementation for verification of HSM attestation in Swish certificat
 ```
 ┌─────────────┐      ┌──────────────────┐      ┌─────────────┐
 │   Client    │──────│  Attestation API │──────│  Getswish   │
-│             │      │                  │      │     CA      │
-│ CSR         │      │ 1. Parse CSR     │      │             │
-│ BankID-sig  │      │ 2. Verify BankID │      │ Issue       │
+│ CSR         │      │                  │      │     CA      │
+│ BankID-sig  │      │ 1. Parse CSR     │      │             │
+│ BankID-ocsp │      │ 2. Verify BankID │      │ Issue       │
 │ OrgNo       │      │ 3. Verify HSM*   │      │ certificate │
 │ SwishNo     │      │                  │      │             │
 │ Attestation*│      │                  │      │             │
