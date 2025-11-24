@@ -133,16 +133,19 @@ Use bankIdOcspResponse to verify signing time and add it to `bankIdSignatureTime
 
 ## Azure Managed HSM
 
-### The client retrieves
+The client must:
+```bash
 az keyvault key get-attestation --hsm-name contoso --name mykey --file attestation.json
 ```
 
-### Sending to server
-curl -X POST .../verify -d '{
+Request:
+```json
+{
   "hsmVendor": "AZURE",
   "attestationData": "<content from attestation.json>",
   ...
-}'
+}
+```
 
 ### Google Cloud HSM
 
