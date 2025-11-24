@@ -59,7 +59,8 @@ public class AttestationService {
         String csrFingerprint = fingerprint(csrPublicKey);
 
         // Verify BankID
-        BankIdService.BankIdResult bankIdResult = bankIdService.verify(request.getBankIdSignatureResponse());
+        BankIdService.BankIdResult bankIdResult = bankIdService.verify(request.getBankIdSignatureResponse(),
+                request.getBankIdOcspResponse());
         if (!bankIdResult.isValid()) {
             errors.add("BankID verification failed: " + bankIdResult.getError());
         }
@@ -187,6 +188,7 @@ public class AttestationService {
                 .bankIdUsrNonVisibleData(bankIdResult.getUsrNonVisibleData())
                 .bankIdRelyingPartyName(bankIdResult.getRelyingPartyName())
                 .bankIdRelyingPartyOrgNumber(bankIdResult.getRelyingPartyOrgNumber())
+                .bankIdSignatureTime(bankIdResult.getSignatureTime())
                 .organisationNumber(request.getOrganisationNumber())
                 .swishNumber(request.getSwishNumber())
                 .authorizedSignatory(authorizedSignatory)

@@ -14,6 +14,8 @@ public class CertificateRequest {
     @NotBlank(message = "BankID signature is required")
     private String bankIdSignatureResponse;
 
+    private String bankIdOcspResponse;
+
     @NotBlank(message = "Organisation number is required")
     @Pattern(regexp = "^\\d{10}(\\d{2})?$", message = "Organisation number must be 10 or 12 digits")
     private String organisationNumber;

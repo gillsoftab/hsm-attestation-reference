@@ -2,6 +2,8 @@ package se.swish.hsm.model;
 
 import lombok.Builder;
 import lombok.Data;
+
+import java.time.Instant;
 import java.util.List;
 
 @Data
@@ -43,6 +45,9 @@ public class VerificationResponse {
     // BankID - Relying Party (the organization the individual signed with)
     private String bankIdRelyingPartyName;
     private String bankIdRelyingPartyOrgNumber;
+
+    // BankID - Signing time (certificate validation time)
+    private Instant bankIdSignatureTime;
 
     // Request data
     private String organisationNumber;

@@ -29,10 +29,12 @@ Reference implementation for verification of HSM attestation in Swish certificat
 ### POST /api/v1/attestation/verify
 
 **Request:**
+Use bankIdOcspResponse to verify signing time and add it to `bankIdSignatureTime` in the output.
 ```json
 {
   "csr": "-----BEGIN CERTIFICATE REQUEST-----\nMIIE...",
   "bankIdSignatureResponse": "PD94bWwgdmVyc2lvbj0iMS4wI...",
+  "bankIdOcspResponse": "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",
   "organisationNumber": "5569741234",
   "swishNumber": "1234567890",
   "hsmVendor": "SECUROSYS",              // Optional - autodetect
@@ -66,6 +68,7 @@ Reference implementation for verification of HSM attestation in Swish certificat
   "bankIdUsrNonVisibleData": "0b7ee6f76c72db770ed5c7fb2d01f9d6a5e9e3160fe9e4f37c678167d055af1e",
   "bankIdRelyingPartyName": "Teknisk leverantör AB",
   "bankIdRelyingPartyOrgNumber": "5569641234",
+  "bankIdSignatureTime": "2025-11-23T07:18:57Z",
   "organisationNumber": "5569541234",
   "swishNumber": "1234567890",
   "authorizedSignatory": true,
@@ -98,6 +101,7 @@ Reference implementation for verification of HSM attestation in Swish certificat
   "bankIdUsrNonVisibleData": "0b7ee6f76c72db770ed5c7fb2d01f9d6a5e9e3160fe9e4f37c678167d055af1e",
   "bankIdRelyingPartyName": "Teknisk leverantör AB",
   "bankIdRelyingPartyOrgNumber": "5569641234",
+  "bankIdSignatureTime": "2025-11-23T07:18:57Z",
   "organisationNumber": "5569541234",
   "swishNumber": "1234567890",
   "authorizedSignatory": true,
@@ -109,7 +113,7 @@ Reference implementation for verification of HSM attestation in Swish certificat
 ## Verification logic
 
 1. **CSR**: Extract public key
-2. **BankID**: Verify signature → extract personal identification number
+2. **BankID**: Verify signature → extract personal identification number, signature time and verify that ocsp serial number matches the serial number in the user certificate in bankIdSignatureResponse.
 3. **Certificate Manager**: Verify that this personal identification number are allowed to issue certificates for the organization number or Swish number.
 4. **HSM attestation** (SIGNING only):
    - Verify that public key in CSR = attestation key
@@ -129,21 +133,18 @@ Reference implementation for verification of HSM attestation in Swish certificat
 
 ## Azure Managed HSM
 
-The client retrieves:
-```bash
+### The client retrieves
 az keyvault key get-attestation --hsm-name contoso --name mykey --file attestation.json
 ```
 
-Request:
-```json
-{
+### Sending to server
+curl -X POST .../verify -d '{
   "hsmVendor": "AZURE",
   "attestationData": "<content from attestation.json>",
   ...
-}
-```
+}'
 
-## Google Cloud HSM
+### Google Cloud HSM
 
 The client must:
 ```bash
